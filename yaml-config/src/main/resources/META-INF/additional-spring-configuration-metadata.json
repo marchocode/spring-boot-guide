@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "customer.name"
+    },
+    {
+      "name": "customer.ip",
+      "defaultValue": "127.0.0.1"
+    },
+    {
+      "name": "customer.port",
+      "defaultValue": 9797
+    }
+  ]
+}

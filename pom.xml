@@ -9,6 +9,7 @@
         <module>global-error-handler</module>
         <module>schedule-task</module>
         <module>rest-template</module>
+        <module>yaml-config</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
