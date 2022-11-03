@@ -12,6 +12,7 @@
         <module>yaml-config</module>
         <module>spring-boot-security-simple</module>
         <module>spring-boot-web-01</module>
+        <module>spring-mvc</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -1,7 +1,5 @@
 package web01;
 
-import org.apache.catalina.core.ApplicationFilterRegistration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.DispatcherServlet;
