@@ -13,6 +13,7 @@
         <module>spring-boot-security-simple</module>
         <module>spring-boot-web-01</module>
         <module>spring-mvc</module>
+        <module>spring-mvc-01</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
