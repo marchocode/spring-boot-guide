@@ -6,6 +6,11 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="file.txt"
 
 < ./local_file.txt
+
+--WebAppBoundary
+Content-Disposition: form-data; name="other"
+
+otherParam
 --WebAppBoundary--
 
 ###

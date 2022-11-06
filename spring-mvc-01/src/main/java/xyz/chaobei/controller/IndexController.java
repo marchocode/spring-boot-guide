@@ -31,26 +31,26 @@ public class IndexController {
         // print handler mapping instance
         Map<String, HandlerMapping> beansOfType1 = webApplicationContext.getBeansOfType(HandlerMapping.class);
         for (Map.Entry<String, HandlerMapping> item : beansOfType1.entrySet()) {
-            log.info("HandlerMapping,name={item},class={}", item.getKey(), item.getValue().getClass().toGenericString());
+            log.info("HandlerMapping,name={},class={}", item.getKey(), item.getValue().getClass().toGenericString());
         }
 
         // print handler adapter
         Map<String, HandlerAdapter> beansOfType2 = webApplicationContext.getBeansOfType(HandlerAdapter.class);
         for (Map.Entry<String, HandlerAdapter> item : beansOfType2.entrySet()) {
-            log.info("HandlerAdapter,name={item},class={}", item.getKey(), item.getValue().getClass().toGenericString());
+            log.info("HandlerAdapter,name={},class={}", item.getKey(), item.getValue().getClass().toGenericString());
         }
 
         // print handler exception resolver
         Map<String, HandlerExceptionResolver> beansOfType3 = webApplicationContext.getBeansOfType(HandlerExceptionResolver.class);
         for (Map.Entry<String, HandlerExceptionResolver> item : beansOfType3.entrySet()) {
-            log.info("HandlerExceptionResolver,name={item},class={}", item.getKey(), item.getValue().getClass().toGenericString());
+            log.info("HandlerExceptionResolver,name={},class={}", item.getKey(), item.getValue().getClass().toGenericString());
         }
 
         // for default. no MultipartResolver has been config.
         Map<String, MultipartResolver> beansOfType = webApplicationContext.getBeansOfType(MultipartResolver.class);
 
         for (Map.Entry<String, MultipartResolver> item : beansOfType.entrySet()) {
-            log.info("MultipartResolver,name={item},class={}", item.getKey(), item.getValue().getClass().toString());
+            log.info("MultipartResolver,name={},class={}", item.getKey(), item.getValue().getClass().toString());
         }
 
         return "index";
@@ -64,9 +64,6 @@ public class IndexController {
      */
     @PostMapping("/user")
     public String user(@RequestBody User user, HttpServletRequest request) {
-
-        WebApplicationContext webApplicationContext = RequestContextUtils.findWebApplicationContext(request);
-
         log.info("body反序列化为参数对象={}", user);
         return "success";
     }
@@ -79,7 +76,19 @@ public class IndexController {
 
 
     @PostMapping("/upload")
-    public String requestPart(MultipartFile multipartFile) throws IOException {
+    public String requestPart(@RequestParam("file") MultipartFile multipartFile, @RequestParam("other") String other, HttpServletRequest request) throws IOException {
+
+        // check out MultipartResolver
+
+        // print following info...
+        // upload,MultipartResolver,name={item},class=multipartResolver
+        WebApplicationContext webApplicationContext = RequestContextUtils.findWebApplicationContext(request);
+        Map<String, MultipartResolver> beansOfType = webApplicationContext.getBeansOfType(MultipartResolver.class);
+        for (Map.Entry<String, MultipartResolver> item : beansOfType.entrySet()) {
+            log.info("upload,MultipartResolver,name={},class={}", item.getKey(), item.getValue().getClass().toString());
+        }
+
+        log.info("upload other variable param other={}", other);
 
         log.info("upload,file name={}", multipartFile.getOriginalFilename());
         log.info("upload,name={}", multipartFile.getName());

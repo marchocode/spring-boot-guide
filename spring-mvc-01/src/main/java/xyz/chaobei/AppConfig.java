@@ -15,9 +15,4 @@ import javax.servlet.annotation.MultipartConfig;
 @EnableWebMvc
 public class AppConfig implements WebMvcConfigurer {
 
-    @Bean
-    public MultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
-    }
-
 }
