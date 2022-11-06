@@ -1,0 +1,25 @@
+### 上传文件
+POST http://localhost:8080/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="file.txt"
+
+< ./local_file.txt
+--WebAppBoundary--
+
+###
+
+### json字符
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{"id": 1,"name": "java"}
+
+### 获得请求头
+GET http://localhost:8080/header
+
+<> 2022-11-06T125855.200.txt
+<> 2022-11-06T125029.200.txt
+
+

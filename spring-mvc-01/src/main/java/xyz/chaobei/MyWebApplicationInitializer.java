@@ -1,13 +1,21 @@
 package xyz.chaobei;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.HandlerMapping;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
+@Slf4j
 public class MyWebApplicationInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -20,6 +28,8 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         DispatcherServlet servlet = new DispatcherServlet(context);
         ServletRegistration.Dynamic registration = servletContext.addServlet("app", servlet);
         registration.setLoadOnStartup(1);
-        registration.addMapping("/app/*");
+        registration.addMapping("/*");
+
+        registration.setMultipartConfig(new MultipartConfigElement((String) null));
     }
 }
