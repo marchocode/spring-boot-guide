@@ -1,14 +1,13 @@
 package xyz.chaobei.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class User implements Serializable {
 
     private Long id;

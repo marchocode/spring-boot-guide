@@ -1,3 +1,29 @@
+### 获得参数1GET
+GET http://localhost:8080/argument?a=1&b=2
+
+### 获得参数2POST
+POST http://localhost:8080/argument
+Content-Type: application/x-www-form-urlencoded
+
+a=1&b=2
+
+### 获得参数3POST
+POST http://localhost:8080/argument
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="a"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="b"
+
+2
+--WebAppBoundary--
+
+###
+
+
 ### 上传文件
 POST http://localhost:8080/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
@@ -13,18 +39,39 @@ Content-Disposition: form-data; name="other"
 otherParam
 --WebAppBoundary--
 
-###
 
 ### json字符
 POST http://localhost:8080/user
 Content-Type: application/json
 
-{"id": 1,"name": "java"}
+{
+  "id": 1,
+  "name": "java"
+}
+
+
+### 获得请求头和请求体
+POST http://localhost:8080/entity
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "java"
+}
 
 ### 获得请求头
 GET http://localhost:8080/header
 
-<> 2022-11-06T125855.200.txt
-<> 2022-11-06T125029.200.txt
+
+### 响应-Json
+GET http://localhost:8080/response/json
 
 
+### 响应-返回响应头和body
+GET http://localhost:8080/response/full
+
+### 响应-只返回响应头
+GET http://localhost:8080/response/only-header
+
+### 转换-自定义转换
+GET http://localhost:8080/form/date?date=20221107

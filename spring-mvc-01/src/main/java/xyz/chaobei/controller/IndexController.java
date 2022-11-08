@@ -1,6 +1,8 @@
 package xyz.chaobei.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
@@ -15,6 +17,8 @@ import xyz.chaobei.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -54,6 +58,17 @@ public class IndexController {
         }
 
         return "index";
+    }
+
+    @RequestMapping("/argument")
+    public Map argument(String a, String b) {
+
+        Map<String, String> result = new HashMap<>();
+
+        result.put("a", a);
+        result.put("b", b);
+
+        return result;
     }
 
     /**
@@ -96,5 +111,39 @@ public class IndexController {
 
         return "success";
     }
+
+
+    @PostMapping("/upload/multipart")
+    public String requestPart(MultipartHttpServletRequest request) throws IOException {
+
+        String other = request.getParameter("other");
+        MultipartFile multipartFile = request.getFile("file");
+
+        log.info("upload other variable param other={}", other);
+
+        log.info("upload,file name={}", multipartFile.getOriginalFilename());
+        log.info("upload,name={}", multipartFile.getName());
+        log.info("upload,file size bytes={}", multipartFile.getBytes().length);
+
+        return "success";
+    }
+
+    @PostMapping("/entity")
+    public String accessHttpEntity(HttpEntity<User> httpEntity) {
+
+        // access headers
+        HttpHeaders headers = httpEntity.getHeaders();
+
+        headers.forEach((str, list) -> {
+            log.info("entity access header={},value={}", str, Arrays.toString(list.toArray()));
+        });
+
+        // access body
+        User user = httpEntity.getBody();
+        log.info("entity access body={}", user);
+
+        return "success";
+    }
+
 
 }
