@@ -1,0 +1,18 @@
+
+
+### 发送时间戳 1668239026170 2022-11-12 16:50:34
+GET http://localhost:8080/user?id=1&name=marcho&date=1668239026170&localDate=2022-11-12&localTime=16:50:34&localDateTime=2022-11-12 16:50:34
+
+
+### POST发送
+POST http://localhost:8080/user
+Content-Type: application/x-www-form-urlencoded
+
+id=1&name=marcho&date=1668239026170&localDate=2022-11-12&localTime=16:50:34&localDateTime=2022-11-12 16:50:34
+
+
+### 验证参数
+POST http://localhost:8080/validation
+Content-Type: application/x-www-form-urlencoded
+
+id=1&name=marchoafsaf
