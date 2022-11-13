@@ -10,6 +10,16 @@ Content-Type: application/x-www-form-urlencoded
 
 id=1&name=marcho&date=1668239026170&localDate=2022-11-12&localTime=16:50:34&localDateTime=2022-11-12 16:50:34
 
+### JSON
+POST http://localhost:8080/json
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "mvc",
+  "date": 1668239026170,
+  "localDateTime": "2022-11-12 15:43:46"
+}
 
 ### 验证参数
 POST http://localhost:8080/validation
