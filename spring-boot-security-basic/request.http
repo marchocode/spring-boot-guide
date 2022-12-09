@@ -1,0 +1,4 @@
+### first request
+# Basic base64(username:password)
+GET http://localhost:8080/api/v1/hello
+Authorization: Basic dXNlcjpiMjVhNWE4ZS01YzUzLTQwNGUtODJiMS02NjI2MWYzOWM0NGM=
