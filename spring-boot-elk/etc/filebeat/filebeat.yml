@@ -1,0 +1,22 @@
+filebeat.inputs:
+- type: filestream
+  id: spring-boot-elk
+  paths:
+    - /var/log/spring-boot-elk/*.log
+
+filebeat.modules:
+- module: nginx
+  access:
+    enabled: true
+    var.paths: ["/var/log/nginx/80.access.log*"]
+  error:
+    enabled: true
+    var.paths: ["/var/log/nginx/error.log*"]
+
+processors:
+- add_cloud_metadata: ~
+
+output.elasticsearch:
+  hosts: ["https://localhost:9200"]
+  ssl.verification_mode: none
+  api_key: "_Y36-4gBka0HEsCz5lQ6:w6t7c2h6TVm7ttEGy6zRLw"

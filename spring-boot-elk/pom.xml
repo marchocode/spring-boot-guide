@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-boot-guide</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-boot-elk</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.8</version>
+            <executions>
+                <execution>
+                <id>default</id>
+                <goals>
+                    <goal>build</goal>
+                    <goal>push</goal>
+                </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <repository>marchocode/${project.artifactId}</repository>
+                <tag>latest</tag>
+                <buildArgs>
+                    <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    <SERVICE_NAME>${project.artifactId}</SERVICE_NAME>
+                </buildArgs>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

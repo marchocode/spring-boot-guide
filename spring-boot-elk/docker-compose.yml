@@ -1,0 +1,51 @@
+version: "3.1"
+
+services:
+  springboot:
+    image: marchocode/spring-boot-elk
+    container_name: springboot
+    network_mode: host
+    expose:
+      - 8080
+    volumes:
+      - "spring-boot-elk:/var/log/spring-boot-elk"
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    network_mode: host
+    volumes:
+      - "./etc/nginx/conf.d:/etc/nginx/conf.d"
+      - "nginx:/var/log/nginx"
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.8.1
+    container_name: filebeat
+    network_mode: host
+    command: filebeat -e --strict.perms=false
+    volumes:
+      - "./etc/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+      - "nginx:/var/log/nginx"
+      - "spring-boot-elk:/var/log/spring-boot-elk"
+  search:
+    image: elasticsearch:8.8.1
+    container_name: search
+    network_mode: host
+    environment:
+      - discovery.type=single-node
+    expose:
+      - 9200
+      - 9300
+  kibana:
+    image: kibana:8.8.1
+    network_mode: host
+    container_name: kibana
+
+volumes:
+  nginx:
+    driver: local
+  spring-boot-elk:
+    driver: local
+
+networks:
+  elk:
+    name: elk
+    driver: host

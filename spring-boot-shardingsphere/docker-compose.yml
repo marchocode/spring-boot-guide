@@ -1,0 +1,35 @@
+version: '3.1'
+services:
+  springboot:
+    image: marchocode/spring-boot-shardingsphere
+    container_name: spring-boot-shardingsphere
+    restart: always
+    ports:
+      - "80:8080"
+  master-db:
+    image: mysql:8.0.32
+    container_name: db-master
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    volumes:
+      - "./mysql/master:/etc/mysql/conf.d"
+  salve-0:
+    image: mysql:8.0.32
+    container_name: db-salve-0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "./mysql/salve-0:/etc/mysql/conf.d"
+  salve-1:
+    image: mysql:8.0.32
+    container_name: db-salve-1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "./mysql/salve-1:/etc/mysql/conf.d"
+
+networks:
+  default:
+    name: desc
+    driver: bridge
