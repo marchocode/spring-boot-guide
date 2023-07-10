@@ -16,6 +16,9 @@
         <module>spring-boot-web-cors-mapping</module>
         <module>spring-boot-web-global-error-handler</module>
         <module>spring-boot-web-rest-template</module>
+        <module>spring-core-annoation</module>
+        <module>spring-core-annoation-web</module>
+        <module>spring-boot-data-sharding</module>
     </modules>
 
     <properties>
